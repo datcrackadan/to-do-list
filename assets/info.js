@@ -1,4 +1,4 @@
-var info = {
+var data = {
   "user" : "john",
   "date" : "28/10/2017-12:00",
   "task" : [
