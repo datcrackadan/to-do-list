@@ -1,0 +1,39 @@
+.main-container {
+  width: 600px;
+  border: 1px solid red;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.info {
+  background-color: #ffffff;
+  display: flex;
+}
+
+.name {
+  width: 200px;
+
+}
+
+.date {
+  width: 300px;
+  margin-left: 100px;
+}
+
+.to-do {
+  background-color: #000010;
+  width: 600px;
+  height: 200px;
+}
+
+.done {
+  background-color: #008000;
+  width: 600px;
+  height: 200px;
+}
+
+.late {
+  background-color: #ff0000;
+  width: 600px;
+  height: 200px;
+}
