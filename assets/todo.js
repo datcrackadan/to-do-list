@@ -50,30 +50,31 @@ function setUser(nickname) {
 }
 
 function setTask(task) {
-  //console.log(task);
-    if (task.done_on === null) {
-      // is a to do task
-      let node = document.createElement('li'); //create a <li>
-      node.className = "list-item";
-      let textnode = document.createTextNode(task.title); // create text
-      node.appendChild(textnode); //append the text to the node <li>
-      document.getElementById("todo").appendChild(node);
-
-    } else {
+  function display(status) {
+    console.log(task);
+  let node = document.createElement('li'); //create a <li>
+  node.className = "list-item";
+  let textnode = document.createTextNode(task.title); // create text
+  node.appendChild(textnode); //append the text to the node <li>
+  document.getElementById("todo").appendChild(node); // append the node <li> to the element #todo
+}
+    let status = "todo";
+    if (task.done_on != null) {
       // task is done
       if (task.done_on <= task.deadline) {
         // task done on time
-
-
-      } else {
+         status ="done";
+    } else {
         //task done late
+        status = "late";
       }
-
-
+     }
+     display(status);
     }
-}
-//
+
+// APP
 const app = function(data) {
+  // user
   let nickname = data.user[0].name;
   setUser(nickname);
 
