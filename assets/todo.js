@@ -19,7 +19,7 @@ function getData() {
       {
         "title"      : "Faire à manger",
         "created_on" : 1510136545,
-        "deadline"   : 1510136545,
+        "deadline"   : 1510136045,
         "done_on"    : 1510136545,
         "user"       : [0]
       },
@@ -34,7 +34,7 @@ function getData() {
         "title"      : "Sortir les poubelles",
         "created_on" : 1510136545,
         "deadline"   : 1510136545,
-        "done_on"    : 1510136575,
+        "done_on"    : null,
         "user"       : [0]
       }
     ]
@@ -50,27 +50,44 @@ function setUser(nickname) {
 }
 
 function setTask(task) {
-  function display(status) {
-    console.log(task);
-  let node = document.createElement('li'); //create a <li>
-  node.className = "list-item";
-  let textnode = document.createTextNode(task.title); // create text
-  node.appendChild(textnode); //append the text to the node <li>
-  document.getElementById("todo").appendChild(node); // append the node <li> to the element #todo
-}
-    let status = "todo";
-    if (task.done_on != null) {
-      // task is done
-      if (task.done_on <= task.deadline) {
-        // task done on time
-         status ="done";
-    } else {
-        //task done late
-        status = "late";
-      }
-     }
-     display(status);
+
+  function taskIsDone() {
+    return task.done_on != null;
+  }
+
+
+  // let status = "todo";
+  let status = taskIsDone() ? (task.done_on <= task.deadline? "done" : "late" ) : "todo";
+  // if (taskIsDone()) {
+  //   // task is done
+  //   if (task.done_on <= task.deadline) {
+  //     // task done on time
+  //     status ="done";
+  //   } else {
+  //     //task done late
+  //     status = "late";
+  //   }
+  //
+  // } else {
+  //
+  //   status = "todo";
+  //
+  // }
+  //console.log(status);
+  display(status);
+
+
+
+
+
+    function display(status) {
+      let node = document.createElement('li'); //create a <li>
+      node.className = "list-item";
+      let textnode = document.createTextNode(task.title); // create text
+      node.appendChild(textnode); //append the text to the node <li>
+      document.getElementById(status).appendChild(node); // append the node <li> to the element #todo
     }
+}
 
 // APP
 const app = function(data) {
@@ -81,8 +98,18 @@ const app = function(data) {
 // task
   let tasks = data.task;
   for (let i in tasks) {
-    setTask(tasks[i])
+    setTask(tasks[i]);
   }
+  // Event Listener
+  let todo = document.getElementById("todo");
+
+  let todoItems = todo.getElementsByClassName("list-item");
+
+  /*let i = 0;
+  while ( todoItems[i] ) {
+    todoItems[i].addEventListener( "click", endTask);
+    i++;
+  }*/
 }
 // APP
 app(getData());
