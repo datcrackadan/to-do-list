@@ -83,10 +83,28 @@ function setTask(task) {
     function display(status) {
       let node = document.createElement('li'); //create a <li>
       node.className = "list-item";
+      node.deadline = task.deadline;
       let textnode = document.createTextNode(task.title); // create text
       node.appendChild(textnode); //append the text to the node <li>
       document.getElementById(status).appendChild(node); // append the node <li> to the element #todo
     }
+}
+
+function endTask(e) {
+  console.log(this.deadline);
+  let now = Math.floor(Date.now() / 1000);
+  let deadline = this.deadline;
+  let status = null;
+  console.log(now);
+
+  if (deadline <= now) {
+    status =document.getElementById("done");
+  } else {
+    status =document.getElementById("late");
+  }
+  status.appendChild(this);
+
+  //todo.removeChild(this)
 }
 
 // APP
@@ -102,14 +120,21 @@ const app = function(data) {
   }
   // Event Listener
   let todo = document.getElementById("todo");
+  //console.log("TODOBLOCK HTML #todo");
+  //console.log(todo);
 
   let todoItems = todo.getElementsByClassName("list-item");
+  //console.log("TODO Childs");
+  //console.log(todoItems);
+  //console.log(todoItems);
 
-  /*let i = 0;
+  let i = 0;
   while ( todoItems[i] ) {
-    todoItems[i].addEventListener( "click", endTask);
+  //  console.log("ITEM");
+  //  console.log(todoItems[i]);
+    todoItems[i].addEventListener( "click", endTask );
     i++;
-  }*/
+  }
 }
 // APP
 app(getData());
