@@ -97,7 +97,7 @@ function endTask(e) {
   let status = null;
   console.log(now);
 
-  if (deadline <= now) {
+  if (deadline >= now) {
     status =document.getElementById("done");
   } else {
     status =document.getElementById("late");
